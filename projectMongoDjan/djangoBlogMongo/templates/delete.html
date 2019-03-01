@@ -1,0 +1,16 @@
+{% extends 'base.html'%}
+{% load material_form %}
+
+{% block title %} Blog Mongo delete {% endblock%}
+{% block content %}
+
+<h1> Blog Mongo- Borrar Entrada </h1>
+    <form method = "post" action="http://127.0.0.1:8000/update/">
+        {% csrf_token %}
+    {% form form=form %}{% endform %}
+    <input type="hidden" name="id" value="{{id}}">
+    <p>Seguro de eliminar post</p>
+    <input type="submit" value="Delete">
+    </form>
+
+{% endblock %}

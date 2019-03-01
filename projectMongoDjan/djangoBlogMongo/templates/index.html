@@ -1,0 +1,32 @@
+{% extends 'base.html' %}
+{% load material_form %}  
+{% block title %} Blog Mongo {% endblock %}
+{% block content %}
+<h1> Blog Mongo </h1>
+
+    <form method="post" action = "http://127.0.0.1:8000/index/">
+        {% csrf_token %}
+    {% form form=form %} {% csrf_token %}{% endform %}
+    <input type="text" name="title" placeholder = "POST TITLE" required>
+    <textarea name="content" placeholder="Enter Content" row=5 col=50 required>
+    </textarea>
+    <input type = "submit" value="Add Post">
+    </form>
+<hr>
+{% for post in Blog %}
+    <h2> {{ post.title }} </h2>
+    <p>{{ post.last_update }} </p>
+    <p> {{post.content }} </p>
+    <form method="get" action = "http://127.0.0.1:8000/update/">
+        <input type="hidden" name="id" value="{{post.id}}">
+        <input type="hidden" name="title" value="{{ post.title }}">
+        <input type="hidden" name="last_update" value="{{ post.last_update }}">
+        <input type="hidden" name="content" value="{{ post.content }}">
+        <input type="submit" name="" value="update">
+    </form>
+    <form method="get" action="http://127.0.0.1:8000/delete/">
+        <input type="hidden" name="id" value = {{ post.id }}>
+        <input type="submit" value="delete">
+    </form>
+    {% endfor %}
+{% endblock %}
